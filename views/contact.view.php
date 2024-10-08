@@ -33,33 +33,33 @@
        	   <h1>CONTACT US</h1>
        	   <hr>
        	   <p>Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
-	       <form class="form-horizontal">
+	       <form class="form-horizontal" method="post">
 	       	  <div class="form-group">
 	       	  	<div class="col-xs-6">
 	       	  	    <label class="label-control">First Name</label>
-	       	  		<input class="form-control" type="text">
+	       	  		<input name="nombre" class="form-control" type="text">
 	       	  	</div>
 	       	  	<div class="col-xs-6">
 	       	  	    <label class="label-control">Last Name</label>
-	       	  		<input class="form-control" type="text">
+	       	  		<input name="apellidos" class="form-control" type="text">
 	       	  	</div>
 	       	  </div>
 	       	  <div class="form-group">
 	       	  	<div class="col-xs-12">
 	       	  		<label class="label-control">Email</label>
-	       	  		<input class="form-control" type="text">
+	       	  		<input name="email" class="form-control" type="text">
 	       	  	</div>
 	       	  </div>
 	       	  <div class="form-group">
 	       	  	<div class="col-xs-12">
 	       	  		<label class="label-control">Subject</label>
-	       	  		<input class="form-control" type="text">
+	       	  		<input name="asunto" class="form-control" type="text">
 	       	  	</div>
 	       	  </div>
 	       	  <div class="form-group">
 	       	  	<div class="col-xs-12">
 	       	  		<label class="label-control">Message</label>
-	       	  		<textarea class="form-control"></textarea>
+	       	  		<textarea name="mensaje" class="form-control"></textarea>
 	       	  		<button class="pull-right btn btn-lg sr-button">SEND</button>
 	       	  	</div>
 	       	  </div>
