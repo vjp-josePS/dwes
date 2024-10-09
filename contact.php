@@ -9,28 +9,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $camposVacios = [];
 
-    if (!empty($nombre) && !empty($gmail) && !empty($asunto)) {
+    if (!empty($nombre) && !empty($email) && !empty($asunto)) {
         if (!empty($nombre)) {
             echo "Nombre: $nombre <br>";
         }else{
-            echo "Nombre incorrecto. <br><br>";
-            $camposVacios = array("nombre");
+            echo "El campo Nombre no puede estar vacío. <br><br>";
+            $camposVacios = array("El campo Nombre está vacío.");
         }
         
         echo "Apellidos: $apellidos <br>";
 
-        if ((filter_var($email, FILTER_VALIDATE_EMAIL)) === false) {
+        if ((filter_var($email, FILTER_VALIDATE_EMAIL))) {
             echo "Gmail: $email <br>";
         } else {
-            echo "Email incorrecto. <br><br>";
-            $camposVacios = array("email");
+            echo "El campo Email no puede estar vacío. <br><br>";
+            $camposVacios = array("El campo Email está vacío.");
         }
 
         if (!empty($asunto)) {
             echo "Asunto: $asunto <br>";
         }else{
-            echo "Asunto incorrecto. <br>";
-            $camposVacios = array("asunto");
+            echo "El campo Asunto no puede estar vacío. <br>";
+            $camposVacios = array("El campo Asunto está vacío.");
         }
         
         echo "Mensaje: $mensaje <br>";
