@@ -8,34 +8,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mensaje = trim(htmlspecialchars($_POST['mensaje']));
 
     $camposVacios = [];
+    $camposCompletos = [];
 
-    if (!empty($nombre) && !empty($email) && !empty($asunto)) {
+    if (!empty($nombre) || !empty($email) || !empty($asunto)) {
         if (!empty($nombre)) {
-            echo "Nombre: $nombre <br>";
+            $camposCompletos[] = "Nombre: $nombre";
         }else{
-            echo "El campo Nombre no puede estar vacío. <br><br>";
-            $camposVacios = array("El campo Nombre está vacío.");
+            
+            $camposVacios[] = "El campo Nombre está vacío.";
         }
         
-        echo "Apellidos: $apellidos <br>";
+        $camposCompletos[] = "Apellidos: $apellidos";
 
         if ((filter_var($email, FILTER_VALIDATE_EMAIL))) {
-            echo "Gmail: $email <br>";
+            $camposCompletos[] = "Email: $email";
         } else {
-            echo "El campo Email no puede estar vacío. <br><br>";
-            $camposVacios = array("El campo Email está vacío.");
+
+            $camposVacios[] = "El campo Email está escrito incorrectamente.";
         }
 
         if (!empty($asunto)) {
-            echo "Asunto: $asunto <br>";
+            $camposCompletos[] = "Asunto: $asunto";
         }else{
-            echo "El campo Asunto no puede estar vacío. <br>";
-            $camposVacios = array("El campo Asunto está vacío.");
+            
+            $camposVacios = "El campo Asunto está vacío.";
         }
         
-        echo "Mensaje: $mensaje <br>";
-    } else {
-        echo "No estan todos los campos obligatorios rellenos.";
+        
+
+    }
+
+    if (!empty($camposCompletos)) {
+        foreach ($camposCompletos as $completos) {
+            echo $completos . '<br>';
+        }
+    }else{
+        foreach ($camposVacios as $vacios) {
+            echo $vacios . '<br>';
+        }
     }
 }
 
