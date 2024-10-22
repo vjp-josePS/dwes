@@ -66,6 +66,7 @@
            <div id="category1" class="tab-pane active" >
               <div class="row popup-gallery">
                 <div class="col-xs-12 col-sm-6 col-md-3">
+                  <!--Primera imagen-->
                 <div class="sol">
                   <img class="img-responsive" src="images/index/portfolio/1.jpg" alt="First category picture">
                   <div class="behind">
@@ -104,6 +105,7 @@
                 </div>
                 </div> 
                 <div class="col-xs-12 col-sm-6 col-md-3">
+                  <!--Segunda imagen-->
                 <div class="sol">
                     <img class="img-responsive" src="images/index/portfolio/2.jpg" alt="First category picture">
                     <div class="behind"> 
@@ -142,6 +144,7 @@
                 </div>
                 </div> 
                 <div class="col-xs-12 col-sm-6 col-md-3">
+                  <!--Tercera imagen-->
                 <div class="sol">
                     <img class="img-responsive" src="images/index/portfolio/3.jpg" alt="First category picture">
                     <div class="behind">
@@ -180,6 +183,7 @@
                 </div>
                 </div> 
                 <div class="col-xs-12 col-sm-6 col-md-3">
+                  <!--Cuarta imagen-->
                 <div class="sol">
                     <img class="img-responsive" src="images/index/portfolio/4.jpg" alt="First category picture">
                     <div class="behind">
@@ -218,6 +222,7 @@
                 </div>
                 </div> 
                 <div class="col-xs-12 col-sm-6 col-md-3">
+                <!--Quinta imagen-->
                 <div class="sol">
                     <img class="img-responsive" src="images/index/portfolio/5.jpg" alt="First category picture">
                     <div class="behind">
@@ -256,6 +261,7 @@
                 </div>
                 </div> 
                 <div class="col-xs-12 col-sm-6 col-md-3">
+                  <!--Sexta imagen-->
                 <div class="sol">
                     <img class="img-responsive" src="images/index/portfolio/8.jpg" alt="First category picture">
                     <div class="behind">
@@ -294,6 +300,7 @@
                 </div>
                 </div> 
                 <div class="col-xs-12 col-sm-6 col-md-3">
+                  <!--Septima imagen-->
                 <div class="sol">
                     <img class="img-responsive" src="images/index/portfolio/7.jpg" alt="First category picture">
                     <div class="behind">
@@ -332,6 +339,7 @@
                 </div>
                 </div> 
                 <div class="col-xs-12 col-sm-6 col-md-3">
+                  <!--Octava imagen-->
                 <div class="sol">
                     <img class="img-responsive" src="images/index/portfolio/6.jpg" alt="First category picture">
                     <div class="behind">
@@ -370,6 +378,7 @@
                 </div>
                 </div> 
                 <div class="col-xs-12 col-sm-6 col-md-3">
+                  <!--Novena imagen-->
                 <div class="sol">
                     <img class="img-responsive" src="images/index/portfolio/9.jpg" alt="First category picture">
                     <div class="behind">
@@ -408,6 +417,7 @@
                 </div>
                 </div> 
                 <div class="col-xs-12 col-sm-6 col-md-3">
+                  <!--Decima imagen-->
                 <div class="sol">
                     <img class="img-responsive" src="images/index/portfolio/10.jpg" alt="First category picture">
                     <div class="behind">
@@ -446,6 +456,7 @@
                 </div>
                 </div> 
                 <div class="col-xs-12 col-sm-6 col-md-3">
+                  <!--Undecima imagen-->
                 <div class="sol">
                     <img class="img-responsive" src="images/index/portfolio/11.jpg" alt="First category picture">
                     <div class="behind">
@@ -484,6 +495,7 @@
                 </div>
                 </div> 
                 <div class="col-xs-12 col-sm-6 col-md-3">
+                  <!--Duodecima imagen-->
                 <div class="sol">
                     <img class="img-responsive" src="images/index/portfolio/12.jpg" alt="First category picture">
                     <div class="behind">
