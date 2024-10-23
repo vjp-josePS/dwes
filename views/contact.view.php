@@ -1,5 +1,6 @@
 <?php include __DIR__.'/partials/inicio-doc.part.php'?>
 
+
 <!-- Navigation Bar -->
    <nav class="navbar navbar-fixed-top navbar-default">
      <div class="container">
@@ -25,6 +26,8 @@
    	 </div>
    </nav>
 <!-- End of Navigation Bar -->
+
+
 
 <!-- Principal Content Start -->
    <div id="contact">

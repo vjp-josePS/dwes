@@ -33,8 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             $camposVacios = "El campo Asunto está vacío.";
         }
-        
-        
+
+            $camposCompletos[] = "Mensaje: $mensaje";
 
     }
 
@@ -49,6 +49,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-require 'views/contact.view.php';
+function mostrarMensaje($nombre, $apellidos, $email, $asunto, $mensaje){
+    if(!empty($camposCompletos)){
+        foreach ($$camposCompletos as $completos) {
+            echo $completos . "<br>";
+        }
+    }else{
+foreach ($camposVacios as $vacios) {
+    echo $vacios . "<br>";
+}
+    }
+}
 
+require 'views/contact.view.php';
 ?>
