@@ -6,7 +6,7 @@
         $galeria = [];
 
         for ($i=1; $i < 12; $i++) { 
-            $imagenGaleria = new imagenGaleria("$i.jpg", 'descripción imagen'. $i, rand(1, 12000), rand(1, 1200), rand(1, 12000));
+            $imagenGaleria = new imagenGaleria("$i.jpg", "descripción imagen $i", rand(1, 12000), rand(1, 1200), rand(1, 12000));
     
             $galeria[] = $imagenGaleria;
         }

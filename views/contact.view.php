@@ -1,6 +1,5 @@
 <?php include __DIR__.'/partials/inicio-doc.part.php'?>
 
-
 <!-- Navigation Bar -->
    <nav class="navbar navbar-fixed-top navbar-default">
      <div class="container">
