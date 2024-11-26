@@ -1,8 +1,6 @@
 <?php
-// Incluye la interfaz IEntity
 require_once 'entities/database/IEntity.class.php';
 
-// Definimos de la clase ImagenGaleria que implementa la interfaz IEntity
 class ImagenGaleria implements IEntity
 {
     const RUTA_IMAGENES_PORTFOLIO = 'images/index/portfolio/';
@@ -16,9 +14,8 @@ class ImagenGaleria implements IEntity
     private $id;
     private $categoria;
 
-    public function __construct($nombre = '',  $descripcion = '', int $categoria = 0, $numVisualizaciones = 0,  $numLikes = 0,  $numDownloads = 0, $id = 0)
+    public function __construct($nombre = '',  $descripcion = '',int $categoria = 0, $numVisualizaciones = 0,  $numLikes = 0,  $numDownloads = 0, $id = 0)
     {
-        // Inicialización de las propiedades con los valores proporcionados o por defecto
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;
         $this->numVisualizaciones = $numVisualizaciones;
@@ -28,7 +25,6 @@ class ImagenGaleria implements IEntity
         $this->categoria = $categoria;
     }
 
-    // Métodos getter
     public function getNombre()
     {
         return $this->nombre;
@@ -64,7 +60,6 @@ class ImagenGaleria implements IEntity
         return $this->categoria;
     }
 
-    // Métodos setter
     public function setNombre($nombre): void
     {
         $this->nombre = $nombre;
@@ -100,19 +95,16 @@ class ImagenGaleria implements IEntity
         $this->categoria = $categoria;
     }
 
-    // Método para obtener la URL de la imagen en el portfolio
     public function getUrlPortfolio(): string
     {
         return self::RUTA_IMAGENES_PORTFOLIO . $this->getNombre();
     }
 
-    // Método para obtener la URL de la imagen en la galería
     public function getUrlGallery(): string
     {
         return self::RUTA_IMAGENES_GALLERY . $this->getNombre();
     }
 
-    // Método para convertir el objeto en un array asociativo
     public function toArray(): array
     {
         return [
