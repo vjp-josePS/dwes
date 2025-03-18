@@ -7,11 +7,11 @@
 	<title>PhotographItem-Responsive Theme | Contact</title>
 
 	<!-- Bootstrap core css -->
-	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
 	<!-- Bootstrap core css -->
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<!-- Font Awesome icons -->
-	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../font-awesome/css/font-awesome.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -38,9 +38,9 @@
 	   	 </div>
 	   	 <div class="collapse navbar-collapse navbar-right" id="menu">
 	   	 	<ul class="nav navbar-nav">
-	   	 		<li class=" lien"><a href="index.html"><i class="fa fa-home sr-icons"></i> Home</a></li>
-	   	 		<li class="lien"><a href="about.html"><i class="fa fa-bookmark sr-icons"></i> About</a></li>
-	   	 		<li class="lien"><a href="blog.html"><i class="fa fa-file-text sr-icons"></i> Blog</a></li>
+	   	 		<li class=" lien"><a href="index.php"><i class="fa fa-home sr-icons"></i> Home</a></li>
+	   	 		<li class="lien"><a href="about.php"><i class="fa fa-bookmark sr-icons"></i> About</a></li>
+	   	 		<li class="lien"><a href="blog.php"><i class="fa fa-file-text sr-icons"></i> Blog</a></li>
 	   	 		<li class="active"><a href="#"><i class="fa fa-phone-square sr-icons"></i> Contact</a></li>
 	   	 	</ul>
 	   	 </div>
