@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/utils/utils.php';
+require_once __DIR__ . '/utils/const.php';
 require_once __DIR__ . '/entities/file.class.php';
 require_once __DIR__ . '/entities/imagenGaleria.class.php';
 // require_once __DIR__ . '/exceptions/FileException.class.php';
