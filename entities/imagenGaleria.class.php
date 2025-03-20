@@ -27,8 +27,8 @@ class ImagenGaleria {
     private $numDownloads;
 
     // Constantes para las rutas de las imágenes
-    const RUTA_IMAGENES_PORTFOLIO = '../images/index/portfolio/';
-    const RUTA_IMAGENES_GALLERY = '../images/index/gallery/';
+    const RUTA_IMAGENES_PORTFOLIO = __DIR__ . '../../images/index/portfolio/';
+    const RUTA_IMAGENES_GALLERY = __DIR__ . '../../images/index/gallery/';
 
     /**
      * Constructor de la clase.
