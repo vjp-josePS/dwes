@@ -30,6 +30,12 @@ $contactHref = 'contact.php';
                 <li class="lien <?php echo $aboutClass; ?>"><a href="<?php echo $aboutHref; ?>"><i class="fa fa-bookmark sr-icons"></i> About</a></li>
                 <li class="lien <?php echo $blogClass; ?>"><a href="<?php echo $blogHref; ?>"><i class="fa fa-file-text sr-icons"></i> Blog</a></li>
                 <li class="lien <?php echo $contactClass; ?>"><a href="<?php echo $contactHref; ?>"><i class="fa fa-phone-square sr-icons"></i> Contact</a></li>
+                <li class="lien <?php echo esOpcionMenuActiva('galeria.php') ? 'active' : ''; ?>">
+                    <a href="galeria.php"><i class="fa fa-image"></i> Galería</a>
+                </li>
+                <li class="lien <?php echo esOpcionMenuActiva('asociados.php') ? 'active' : ''; ?>">
+                    <a href="asociados.php"><i class="fa fa-hand-o-right"></i> Asociados</a>
+                </li>
             </ul>
         </div>
     </div>

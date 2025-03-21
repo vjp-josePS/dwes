@@ -18,3 +18,8 @@ function existeOpcionMenuActivaEnArray(array $opcionesMenu): bool
     }
     return false;
 }
+
+function obtenerTresElementosAleatorios($array) {
+    shuffle($array);
+    return array_slice($array, 0, 3);
+}
