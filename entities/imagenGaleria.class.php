@@ -2,6 +2,10 @@
 
 class ImagenGaleria {
     /**
+     * @var int|null
+     */
+    private $id;
+    /**
      * @var string
      */
     private $nombre;
@@ -27,8 +31,8 @@ class ImagenGaleria {
     private $numDownloads;
 
     // Constantes para las rutas de las imágenes
-    const RUTA_IMAGENES_PORTFOLIO = __DIR__ . '../../images/index/portfolio/';
-    const RUTA_IMAGENES_GALLERY = __DIR__ . '../../images/index/gallery/';
+    const RUTA_IMAGENES_PORTFOLIO = 'images/index/portfolio/';
+    const RUTA_IMAGENES_GALLERY = 'images/index/gallery/';
 
     /**
      * Constructor de la clase.
@@ -39,8 +43,9 @@ class ImagenGaleria {
      * @param int $numLikes
      * @param int $numDownloads
      */
-    public function __construct(string $nombre, string $descripcion, int $numVisualizaciones = 0, int $numLikes = 0, int $numDownloads = 0) {
+    public function __construct(string $nombre = '', string $descripcion = '', int $numVisualizaciones = 0, int $numLikes = 0, int $numDownloads = 0, int $id=null) {
         // Inicializamos los atributos con los valores pasados al constructor.
+        $this->id = $id; // Si tu clase tiene un ID, lo inicializas aquí
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;
         $this->numVisualizaciones = $numVisualizaciones;
@@ -49,6 +54,20 @@ class ImagenGaleria {
     }
 
     // Getters y Setters
+
+    /**
+     * @return int|null
+     */
+    public function getId(): ?int {
+        return $this->id;
+    }
+
+    /**
+     * @param int|null $id
+     */
+    public function setId(?int $id): void {
+        $this->id = $id;
+    }
 
     /**
      * @return string
