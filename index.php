@@ -3,8 +3,14 @@ require_once __DIR__ . '/utils/utils.php';
 require_once __DIR__ . '/entities/imagenGaleria.class.php';
 require_once __DIR__ . '/entities/asociados.class.php';
 require_once __DIR__ . '/database/Connection.class.php';
+require_once __DIR__ . '/core/App.class.php';
 
 try {
+
+    // Cargar la configuración y guardarla en el contenedor de servicios
+    $config = require __DIR__ . '/config.php';
+    App::bind('config', $config);
+
     // Establecer conexión con la base de datos
     $connection = Connection::make();
 
@@ -38,7 +44,6 @@ try {
 
     // Seleccionar 3 asociados aleatorios
     $asociadosMostrar = obtenerTresElementosAleatorios($asociados);
-
 } catch (PDOException $e) {
     die("Error de base de datos: " . $e->getMessage());
 } catch (Exception $e) {
