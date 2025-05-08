@@ -50,24 +50,25 @@
                             <th scope="col">Descargas</th>
                         </tr>
                     </thead>
-                    <?php foreach ($imagenes as $imagen): ?>
-                        <tr>
-                            <th scope="row "><?=$imagen->getId()?></th>
-
-                            <td>
-                                <img src="<?=$imagen->getUrlGallery() ?>" alt="<?=$imagen->getDescripcion() ?>" title="<?=$imagen->getDescripcion() ?>" class="img-fluid" width="200px">
-                            </td>
-                            <td>
-                                <?=$imagen->getNumVisualizaciones() ?>
-                            </td>
-                            <td>
-                                <?=$imagen->getNumLikes() ?>
-                            </td>
-                            <td>
-                                <?=$imagen->getNumDownloads() ?>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
+                    <tbody>
+                        <?php foreach (($imagenes ?? []) as $imagen): ?>
+                            <tr>
+                                <th scope="row"><?=$imagen->getId()?></th>
+                                <td>
+                                    <img src="<?=$imagen->getUrlGallery() ?>" alt="<?=$imagen->getDescripcion() ?>" title="<?=$imagen->getDescripcion() ?>" class="img-fluid" style="max-height:200px;">
+                                </td>
+                                <td>
+                                    <?=$imagen->getNumVisualizaciones() ?>
+                                </td>
+                                <td>
+                                    <?=$imagen->getNumLikes() ?>
+                                </td>
+                                <td>
+                                    <?=$imagen->getNumDownloads() ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
                 </table>
             </div>
         </div>

@@ -1,14 +1,14 @@
 <?php
-$host = 'localhost';
-$db = 'proyecto';
-$user = 'userProyecto';
-$password = 'userProyecto';
-$charset = 'utf8';
-
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-
-$options = [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES => false,
+return [
+    'database' => [
+        'name' => 'proyecto',
+        'username' => 'userProyecto',
+        'password' => 'userProyecto',
+        'connection' => 'mysql:host=dwes.local',
+        'options' => [
+            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_PERSISTENT => true
+        ]
+    ]
 ];

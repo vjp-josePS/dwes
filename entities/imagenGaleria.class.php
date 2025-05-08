@@ -1,6 +1,8 @@
 <?php
 
-class ImagenGaleria {
+require_once __DIR__ . '/../database/IEntity.class.php';
+
+class ImagenGaleria implements IEntity {
     /**
      * @var int|null
      */
@@ -157,5 +159,16 @@ class ImagenGaleria {
      */
     public function getUrlGallery(): string {
         return self::RUTA_IMAGENES_GALLERY . $this->getNombre();
+    }
+
+    public function toArray(): array{
+        return [
+            'id' => $this->getId(),
+            'nombre' => $this->getNombre(),
+            'descripcion' => $this->getDescripcion(),
+            'numVisualizaciones' => $this->getNumVisualizaciones(),
+            'numLikes' => $this->getNumLikes(),
+            'numDescargas' => $this->getNumDownloads()
+        ];
     }
 }
