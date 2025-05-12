@@ -32,6 +32,19 @@
                 </div>
                 <div class="form-group">
                     <div class="col-xs-12">
+                        <label class="label-control">Categoría</label>
+                        <select name="categoria" class="form-control">
+                            <?php foreach ($categorias as $categoria): ?>
+                                <option value = "<?= $categoria->getId() ?>">
+                                <?= $categoria->getNombre() ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-12">
                         <label class="label-control">Descripción</label>
                         <textarea class="form-control" name="descripcion"> <?= $descripcion ?></textarea>
                         <button class="pull-right btn btn-lg sr-button">ENVIAR</button>
@@ -45,6 +58,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Imagen</th>
+                            <th scope="col">Categoría</th>
                             <th scope="col">Visualizaciones</th>
                             <th scope="col">Likes</th>
                             <th scope="col">Descargas</th>
@@ -57,6 +71,10 @@
                                 <td>
                                     <img src="<?=$imagen->getUrlGallery() ?>" alt="<?=$imagen->getDescripcion() ?>" title="<?=$imagen->getDescripcion() ?>" class="img-fluid" style="max-height:200px;">
                                 </td>
+                                <td>
+                                    <?=$imagen->getCategoria() ?>
+                                </td>
+                                <td>
                                 <td>
                                     <?=$imagen->getNumVisualizaciones() ?>
                                 </td>

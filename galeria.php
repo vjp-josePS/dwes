@@ -14,6 +14,9 @@ require_once __DIR__ . '/core/App.class.php';
 
 require_once __DIR__ . '/repository/ImagenGaleriaRepository.class.php';
 
+require_once __DIR__ . '/repository/CategoriaRepository.class.php';
+require_once __DIR__ . '/entities/Categoria.class.php';
+
 // // array para guardar los mensajes de los errores
 // $errores = [];
 // $descripcion = '';
@@ -165,9 +168,14 @@ try{
 
     //$queryBuilder = new QueryBuilder('imagenes', 'ImagenGaleria');
     $imagenRepository = new ImagenGaleriaRepository();
+    $categoriaRepository = new CategoriaRepository();
 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $descripcion = trim(htmlspecialchars($_POST['descripcion']));
+
+        $categoria = trim(htmlspecialchars($_POST['categoria']));
+
+        var_dump($categoria);
 
         $tiposAceptados = ['image/jpeg', 'image/jpg', 'image/gif', 'image/png'];
         // Tipologia MIME 'tipodearchivo/extension'
@@ -178,10 +186,10 @@ try{
 
         $imagen->copyFile(ImagenGaleria::RUTA_IMAGENES_GALLERY, ImagenGaleria::RUTA_IMAGENES_PORTFOLIO);
 
-        $imagenGaleria = new ImagenGaleria($imagen->getFileName(), $descripcion);
+        $imagenGaleria = new ImagenGaleria($imagen->getFileName(), $descripcion, $categoria);
 
         // Guardamos la imagen en la base de datos
-        $imagenRepository->save(new ImagenGaleria($imagen->getFileName(), $descripcion));
+        $imagenRepository->save($imagenGaleria);
 
         $descripcion = ''; // Reinicio de la variable para que no aparezca en el formulario
         $mensaje = 'Imagen guardada correctamente';
@@ -195,6 +203,7 @@ catch (QueryException $exception){
     $errores[] = $exception->getMessage();
 } finally {
     $imagenes = $imagenRepository->findAll();
+    $categorias = $categoriaRepository->findAll();
 }
 
 require 'views/galeria.view.php';

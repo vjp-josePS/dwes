@@ -32,6 +32,11 @@ class ImagenGaleria implements IEntity {
      */
     private $numDownloads;
 
+    /**
+     * @var int
+     */
+    private $categoria;
+
     // Constantes para las rutas de las imágenes
     const RUTA_IMAGENES_PORTFOLIO = 'images/index/portfolio/';
     const RUTA_IMAGENES_GALLERY = 'images/index/gallery/';
@@ -44,15 +49,16 @@ class ImagenGaleria implements IEntity {
      * @param int $numVisualizaciones
      * @param int $numLikes
      * @param int $numDownloads
+     * @param int $categoria
      */
-    public function __construct(string $nombre = '', string $descripcion = '', int $numVisualizaciones = 0, int $numLikes = 0, int $numDownloads = 0, int $id=null) {
+    public function __construct(string $nombre = '', string $descripcion = '', int $categoria = 0, int $numVisualizaciones = 0, int $numLikes = 0, int $numDownloads = 0) {
         // Inicializamos los atributos con los valores pasados al constructor.
-        $this->id = $id; // Si tu clase tiene un ID, lo inicializas aquí
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;
         $this->numVisualizaciones = $numVisualizaciones;
         $this->numLikes = $numLikes;
         $this->numDownloads = $numDownloads;
+        $this->categoria = $categoria;
     }
 
     // Getters y Setters
@@ -141,6 +147,20 @@ class ImagenGaleria implements IEntity {
         $this->numDownloads = $numDownloads;
     }
 
+    /**
+     * @return int
+     */
+    public function getCategoria(): int {
+        return $this->categoria;
+    }
+    
+    /**
+     * @param int $categoria
+     */
+    public function setCategoria(int $categoria): void {
+        $this->categoria = $categoria;
+    }
+
     // Métodos para obtener las URLs de las imágenes
 
     /**
@@ -168,7 +188,8 @@ class ImagenGaleria implements IEntity {
             'descripcion' => $this->getDescripcion(),
             'numVisualizaciones' => $this->getNumVisualizaciones(),
             'numLikes' => $this->getNumLikes(),
-            'numDescargas' => $this->getNumDownloads()
+            'numDescargas' => $this->getNumDownloads(),
+            'categoria' => $this->getCategoria(),
         ];
     }
 }

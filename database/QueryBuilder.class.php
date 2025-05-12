@@ -85,7 +85,7 @@ abstract class QueryBuilder
             $statement = $this->connection->prepare($sql);
             $statement->execute($parameters);
         } catch (PDOException $exception) {
-            throw new QueryException("Error al insertar en la Base de Datos: ");
+            throw new QueryException("Error al insertar en la Base de Datos: " . $exception->getMessage());
         }
     }
 }
