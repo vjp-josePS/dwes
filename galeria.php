@@ -189,7 +189,7 @@ try{
         $imagenGaleria = new ImagenGaleria($imagen->getFileName(), $descripcion, $categoria);
 
         // Guardamos la imagen en la base de datos
-        $imagenRepository->save($imagenGaleria);
+        $imagenRepository->guarda($imagenGaleria);
 
         $descripcion = ''; // Reinicio de la variable para que no aparezca en el formulario
         $mensaje = 'Imagen guardada correctamente';

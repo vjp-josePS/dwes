@@ -31,6 +31,14 @@ class Categoria implements IEntity
     }
 
     /**
+     * @param int
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
      * @param string
      */
     public function getNombre(): string
@@ -39,11 +47,27 @@ class Categoria implements IEntity
     }
 
     /**
+     * @param string
+     */
+    public function setNombre(string $nombre): void
+    {
+        $this->nombre = $nombre;
+    }
+
+    /**
      * @param int
      */
     public function getNumImagenes(): int
     {
         return $this->numImagenes;
+    }
+
+    /**
+     * @param int
+     */
+    public function setNumImagenes(int $numImagenes): void
+    {
+        $this->numImagenes = $numImagenes;
     }
 
     public function toArray(): array{

@@ -72,7 +72,7 @@
                                     <img src="<?=$imagen->getUrlGallery() ?>" alt="<?=$imagen->getDescripcion() ?>" title="<?=$imagen->getDescripcion() ?>" class="img-fluid" style="max-height:200px;">
                                 </td>
                                 <td>
-                                    <?=$imagen->getCategoria() ?>
+                                    <?=$imagenRepository -> getCategoria($imagen)->getNombre() ?>
                                 </td>
                                 <td>
                                 <td>

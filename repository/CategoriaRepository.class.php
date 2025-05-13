@@ -5,4 +5,9 @@ class CategoriaRepository extends QueryBuilder
     {
         parent::__construct($table, $classEntity);
     }
+
+    public function nuevaImagen(Categoria $categoria){
+        $categoria->setNumImagenes($categoria->getnumImagenes() + 1);
+        $this->update($categoria); // update estará en QueryBuilder
+    }
 }
