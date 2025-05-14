@@ -37,26 +37,26 @@
 
     <!-- Navigation Table Content -->
     <div class="tab-content">
-      <?php
-      // Categoría 1 (activa por defecto)
-      $categoriaId = 1;
-      $esActiva = true; // Esta categoría es activa por defecto
-      shuffle($imagenes); // Mezclamos el array de imágenes
-      include __DIR__ . '/partials/imageGallery.part.php';
+  <?php
+  // Categoría 1 (activa por defecto)
+  $categoriaId = 1;
+  $esActiva = true;
+  $imagenes = $imagenesCategoria1;
+  include __DIR__ . '/partials/imageGallery.part.php';
 
-      // Categoría 2
-      $categoriaId = 2;
-      $esActiva = false; // Esta categoría no es activa
-      shuffle($imagenes); // Mezclamos nuevamente el array de imágenes
-      include __DIR__ . '/partials/imageGallery.part.php';
+  // Categoría 2
+  $categoriaId = 2;
+  $esActiva = false;
+  $imagenes = $imagenesCategoria2;
+  include __DIR__ . '/partials/imageGallery.part.php';
 
-      // Categoría 3
-      $categoriaId = 3;
-      $esActiva = false; // Esta categoría no es activa
-      shuffle($imagenes); // Mezclamos nuevamente el array de imágenes
-      include __DIR__ . '/partials/imageGallery.part.php';
-      ?>
-    </div>
+  // Categoría 3
+  $categoriaId = 3;
+  $esActiva = false;
+  $imagenes = $imagenesCategoria3;
+  include __DIR__ . '/partials/imageGallery.part.php';
+  ?>
+</div>
 
     <!-- End of Navigation Table Content -->
   </div><!-- End of Index-body box -->

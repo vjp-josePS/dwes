@@ -14,7 +14,7 @@ try {
     // Establecer conexión con la base de datos
     $connection = Connection::make();
 
-    // Cargar imágenes desde la base de datos y asignar contadores aleatorios
+    // Cargar imágenes desde la base de datos
     $imagenes = [];
     $stmtImagenes = $connection->prepare("SELECT * FROM imagenes");
     $stmtImagenes->execute();
@@ -23,11 +23,21 @@ try {
         $imagenes[] = new ImagenGaleria(
             $fila['nombre'],
             $fila['descripcion'],
-            rand(800, 1500), // Visualizaciones aleatorias
-            rand(300, 800),  // Likes aleatorios
-            rand(50, 200)    // Descargas aleatorias
+            //$fila['categoria'],
+            0,
+            rand(800, 1500),
+            rand(300, 850),
+            rand(50, 200)
         );
     }
+
+    // Mezclar imágenes para las categorías manuales
+    $imagenesCategoria1 = $imagenes;
+    $imagenesCategoria2 = $imagenes;
+    $imagenesCategoria3 = $imagenes;
+    shuffle($imagenesCategoria1);
+    shuffle($imagenesCategoria2);
+    shuffle($imagenesCategoria3);
 
     // Cargar asociados desde la base de datos
     $asociados = [];
