@@ -1,35 +1,44 @@
 <?php
-require_once __DIR__ . '/../exceptions/AppException.class.php';
-require_once __DIR__ . '/../database/Connection.class.php';
+// Importación de las clases necesarias
+require_once __DIR__ . '/../exceptions/AppException.class.php';  // Manejo de excepciones
+require_once __DIR__ . '/../database/Connection.class.php';      // Conexión a base de datos
 
+/**
+ * Clase App
+ * Implementa el patrón Service Container para gestionar las dependencias de la aplicación
+ * Actúa como un contenedor global de servicios y configuraciones
+ */
 class App
 {
     /**
+     * Contenedor de servicios y configuraciones
+     * Almacena objetos y valores que se utilizarán en toda la aplicación
      * @var array
      */
-
     private static $container = [];
 
     /**
-     * @param $clave
-     * @param $valor
-     * recibe tanto la clave donde almacenar el objeto como el propio objeto
+     * Almacena un valor en el contenedor
+     * 
+     * @param string $clave Identificador único para el valor
+     * @param mixed $valor Cualquier valor o objeto a almacenar
+     * @return void
      */
-
     public static function bind($clave, $valor)
     {
         static::$container[$clave] = $valor;
     }
 
     /**
-     * @param string $key
-     * @return mixed
-     * @throws AppException
+     * Recupera un valor del contenedor
+     * 
+     * @param string $key Clave del valor a recuperar
+     * @return mixed El valor almacenado
+     * @throws AppException Si la clave no existe en el contenedor
      */
-
     public static function get(string $key)
     {
-        // si existe el elemento lo devuelve o sino lanza excepción
+        // Verifica si existe la clave en el contenedor
         if (!array_key_exists($key, static::$container)) {
             throw new AppException("No se ha encontrado la clave en el contenedor.");
         }
@@ -37,13 +46,35 @@ class App
         return static::$container[$key];
     }
 
+    /**
+     * Obtiene la conexión a la base de datos
+     * Implementa el patrón Singleton para la conexión
+     * 
+     * @return PDO Objeto de conexión a la base de datos
+     */
     public static function getConnection()
     {
+        // Si no existe la conexión, la crea y almacena
         if (!array_key_exists('connection', static::$container)) {
             static::$container['connection'] = Connection::make();
         }
+        // Devuelve la conexión existente o recién creada
         return static::$container['connection'];
-
-        // En vez de pasarle el método make los parametros de conexión, editaremos el método make de la clase Connection para que sea el quien cojo los datos del container
     }
 }
+
+/* Ejemplo de uso:
+// Almacenar configuración
+App::bind('config', [
+    'database' => [
+        'name' => 'mi_base_datos',
+        'username' => 'usuario'
+    ]
+]);
+
+// Recuperar configuración
+$config = App::get('config');
+
+// Obtener conexión a base de datos
+$db = App::getConnection();
+*/

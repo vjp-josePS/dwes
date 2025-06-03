@@ -1,26 +1,33 @@
-<?php include __DIR__ . '/partials/inicio-doc.part.php' ?>
+<?php 
+// Incluye la cabecera del documento HTML
+include __DIR__ . '/partials/inicio-doc.part.php' ?>
 
-<?php include __DIR__ . '/partials/nav.part.php' ?>
+<?php 
+// Incluye la barra de navegación
+include __DIR__ . '/partials/nav.part.php' ?>
 
 <!-- Principal Content Start -->
 <div id="blog">
   <div class="container">
     <div class="row">
-
-      <!-- Blocks of Posts -->
+      <!-- Sección principal con los posts del blog -->
       <div class="col-xs-12 col-sm-8 row">
+        <!-- Primer post del blog -->
         <div class="col-xs-12 col-sm-12">
           <div class="post">
+            <!-- Cabecera del post con fecha e imagen -->
             <div class="post-heading">
               <span>6 JANUARY</span>
               <img class="img-responsive" src="../images/blog/landscape.jpg" alt="post's picture">
             </div>
+            <!-- Contenido del post -->
             <div class="post-body">
               <h3><a href="single_post.html"><strong>doloremque illum</strong></a></h3>
               <hr>
               <p>Duis ultrices tortor non felis convallis bibendum. Maecenas diam velit, sollicitudin at imperdiet ac, consectetur non nibh. Etiam eget dapibus nulla.
               </p>
             </div>
+            <!-- Pie del post con botones de acción -->
             <div class="post-footer">
               <a class="btn" href="single_post.html">READ MORE...</a>
               <span>
@@ -72,21 +79,23 @@
             </div>
           </div>
         </div>
+        <!-- Sistema de paginación -->
         <nav class="text-left">
           <ul class="pagination">
             <li class="active"><a href="#">1</a></li>
             <li><a href="#">2</a></li>
             <li><a href="#">3</a></li>
-            <li><a href="#" aria-label="suivant">
+            <li><a href="#" aria-label="siguiente">
                 <span aria-hidden="true">&raquo;</span>
               </a></li>
           </ul>
         </nav>
       </div>
-      <!-- End of Blog Post -->
+      <!-- Fin de la sección de posts -->
 
-      <!-- Side bar -->
+      <!-- Barra lateral -->
       <div class="col-xs-12 col-sm-4">
+        <!-- Formulario de búsqueda -->
         <form class="form-horizontal">
           <div class="input-group">
             <input class="form-control" type="text" placeholder="Research">
@@ -95,6 +104,8 @@
             </span>
           </div>
         </form>
+
+        <!-- Panel de categorías -->
         <div class="panel">
           <div class="panel-heading">
             <h4>Categories</h4>
@@ -109,12 +120,11 @@
             </ul>
           </div>
         </div>
-        <div class="well">
-          <h4>Soluta</h4>
-          <p>Quod soluta corrupti earum officia vel inventore vitae quidem, consequuntur odit impedit.</p>
-        </div>
+
+        <!-- Sección de posts recientes -->
         <h3>Recent Posts</h3>
         <hr>
+        <!-- Posts recientes con miniaturas -->
         <div class="post">
           <div class="post-heading">
             <span>10 APRIL</span>
@@ -142,30 +152,30 @@
           </div>
         </div>
       </div>
-      <!-- End of Side bar -->
-
+      <!-- Fin de la barra lateral -->
     </div>
   </div>
 </div>
-<!-- End of Principal Content Start -->
 
-<!-- Footer -->
+<!-- Pie de página -->
 <footer>
   <div class="container text-muted text-center">
+    <!-- Botones de redes sociales -->
     <ul class="list-inline social-buttons">
-      <li><a href="#"><i class="fa fa-facebook sr-icons"></i></a>
-      </li>
-      <li><a href="#"><i class="fa fa-twitter sr-icons"></i></a>
-      </li>
-      <li><a href="#"><i class="fa fa-google-plus sr-icons"></i></a>
-      </li>
+      <li><a href="#"><i class="fa fa-facebook sr-icons"></i></a></li>
+      <li><a href="#"><i class="fa fa-twitter sr-icons"></i></a></li>
+      <li><a href="#"><i class="fa fa-google-plus sr-icons"></i></a></li>
     </ul>
+    <!-- Información de contacto -->
     <ul class="list-inline">
       <li class="footer-number"><i class="fa fa-phone sr-icons"></i> (00228)92229954 </li>
       <li><i class="fa fa-envelope sr-icons"></i> kouvenceslas93@gmail.com</li>
     </ul>
+    <!-- Copyright -->
     <p>Photography Fanatic Template &copy; 2017</p>
   </div>
 </footer>
 
-<?php include __DIR__ . '/partials/fin-doc.part.php' ?>
+<?php 
+// Incluye el pie del documento HTML
+include __DIR__ . '/partials/fin-doc.part.php' ?>

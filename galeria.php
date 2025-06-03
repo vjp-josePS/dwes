@@ -1,209 +1,78 @@
 <?php
-require_once __DIR__ . '/utils/utils.php';
-require_once __DIR__ . '/utils/const.php';
-require_once __DIR__ . '/entities/file.class.php';
-require_once __DIR__ . '/entities/imagenGaleria.class.php';
-// require_once __DIR__ . '/exceptions/FileException.class.php';
-require_once __DIR__ . '/database/Connection.class.php';
-require_once __DIR__ . '/database/QueryBuilder.class.php';
-require_once __DIR__ . '/exceptions/QueryException.class.php';
-require_once __DIR__ . '/exceptions/FileException.class.php';
+// Importación de todas las clases y utilidades necesarias
+require_once __DIR__ . '/utils/utils.php';           // Funciones de utilidad generales
+require_once __DIR__ . '/utils/const.php';           // Constantes de la aplicación
+require_once __DIR__ . '/entities/file.class.php';   // Clase para manejo de archivos
+require_once __DIR__ . '/entities/imagenGaleria.class.php';  // Clase para las imágenes de la galería
+require_once __DIR__ . '/database/Connection.class.php';      // Clase para la conexión a BD
+require_once __DIR__ . '/database/QueryBuilder.class.php';    // Clase para construir consultas
+require_once __DIR__ . '/exceptions/QueryException.class.php'; // Excepciones de consultas
+require_once __DIR__ . '/exceptions/FileException.class.php';  // Excepciones de archivos
+require_once __DIR__ . '/exceptions/AppException.class.php';   // Excepciones generales
+require_once __DIR__ . '/core/App.class.php';                 // Núcleo de la aplicación
+require_once __DIR__ . '/repository/ImagenGaleriaRepository.class.php'; // Repositorio de imágenes
+require_once __DIR__ . '/repository/CategoriaRepository.class.php';     // Repositorio de categorías
+require_once __DIR__ . '/entities/Categoria.class.php';       // Clase para las categorías
 
-require_once __DIR__ . '/exceptions/AppException.class.php';
-require_once __DIR__ . '/core/App.class.php';
+// Inicialización de variables
+$errores = [];      // Array para almacenar mensajes de error
+$descripcion = '';  // Variable para la descripción de la imagen
+$mensaje = '';      // Variable para mensajes de éxito
 
-require_once __DIR__ . '/repository/ImagenGaleriaRepository.class.php';
-
-require_once __DIR__ . '/repository/CategoriaRepository.class.php';
-require_once __DIR__ . '/entities/Categoria.class.php';
-
-// // array para guardar los mensajes de los errores
-// $errores = [];
-// $descripcion = '';
-// $mensaje = '';
-
-// // Ruta del archivo o carpeta que deseas verificar
-// $ruta = '../images/index/gallery';
-
-// // Cargamos la configuración y la guardamos en el contenedor de servicios
-// $config = require __DIR__ . '/config.php';
-// App::bind('config', $config);
-
-// $queryBuilder = new QueryBuilder('imagenes', 'ImagenGaleria');
-
-// Verificamos que el archivo config.php devuelve correctamente el aray
-// $config = require __DIR__ . '/config.php';
-// var_dump($config);
-// exit;
-
-
-
-// Me las he tenido que apañar 
-/*
 try {
-    $connection = Connection::make();
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-        $descripcion = trim(htmlspecialchars($_POST['descripcion']));
-
-        $tiposAceptados = ['image/jpeg', 'image/jpg', 'image/gif', 'image/png'];
-        // Tipologia MIME 'tipodearchivo/extension'
-        $imagen = new File('imagen', $tiposAceptados);
-        // el parametro fileName es 'imagen' porque así lo indicamos en el formulario (type='file' name='imagen')
-
-        $imagen->saveUploadFile(ImagenGaleria::RUTA_IMAGENES_GALLERY);
-
-        $imagen->copyFile(ImagenGaleria::RUTA_IMAGENES_GALLERY, ImagenGaleria::RUTA_IMAGENES_PORTFOLIO);
-
-        // Consulta preparada con parámetros nombrados
-        $sql = "INSERT INTO imagenes (nombre, descripcion) VALUES (:nombre, :descripcion)";
-        $pdoStatement = $connection->prepare($sql);
-
-        // Array de parámetros para la consulta preparada
-        $parametros = [
-            ':nombre' => $imagen->getFileName(),
-            ':descripcion' => $descripcion
-        ];
-
-        // Ejecutar la consulta preparada
-        if ($pdoStatement->execute($parametros) === false) {
-            $errores[] = "No se ha podido guardar la imagen en la base de datos";
-        } else {
-            $descripcion = ''; // Reinicio de la variable para que no aparezca en el formulario
-            $mensaje = 'Imagen guardada correctamente';
-        }
-    }
-
-    $queryBuilder = new QueryBuilder($connection);
-    $imagenes = $queryBuilder->findAll('imagenes', 'ImagenGaleria');
-} catch (FileException $exception) {
-    $errores[] = $exception->getMessage();
-    // Guardo en un array los errores
-} catch (QueryException $exception) {
-    $errores[] = $exception->getMessage();
-}
-*/
-
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//     try {
-//         $descripcion = trim(htmlspecialchars($_POST['descripcion']));
-
-//         $tiposAceptados = ['image/jpeg', 'image/jpg', 'image/gif', 'image/png'];
-//         // Tipologia MIME 'tipodearchivo/extension'
-//         $imagen = new File('imagen', $tiposAceptados);
-//         // el parametro fileName es 'imagen' porque así lo indicamos en el formulario (type='file' name='imagen')
-
-//         $imagen->saveUploadFile(ImagenGaleria::RUTA_IMAGENES_GALLERY);
-
-//         $imagen->copyFile(ImagenGaleria::RUTA_IMAGENES_GALLERY, ImagenGaleria::RUTA_IMAGENES_PORTFOLIO);
-
-//         // Podemos obtener la conexión llamando al método getConnection
-//         $connection = App::getConnection();
-
-//         // Consulta preparada con parámetros nombrados
-//         $sql = "INSERT INTO imagenes (nombre, descripcion) VALUES (:nombre, :descripcion)";
-//         $pdoStatement = $connection->prepare($sql);
-
-//         // Array de parámetros para la consulta preparada
-//         $parametros = [
-//             ':nombre' => $imagen->getFileName(),
-//             ':descripcion' => $descripcion
-//         ];
-
-//         // Ejecutar la consulta preparada
-//         if ($pdoStatement->execute($parametros) === false) {
-//             $errores[] = "No se ha podido guardar la imagen en la base de datos";
-//         } else {
-//             $descripcion = ''; // Reinicio de la variable para que no aparezca en el formulario
-//             $mensaje = 'Imagen guardada correctamente';
-//         }
-
-//         $queryBuilder = new QueryBuilder('imagenes', 'ImagenGaleria');
-//         $imagenes = $queryBuilder->findAll();
-
-//     } catch (FileException $exception) {
-//         $errores[] = $exception->getMessage();
-//         // Guardo en un array los errores
-//     } catch (PDOException $exception) {
-//         $errores[] = "Error de base de datos: " . $exception->getMessage();
-//     } catch (AppException $exception) {
-//         $errores[] = $exception->getMessage();
-//     } finally {
-//         $queryBuilder = new QueryBuilder('imagenes', 'ImagenGaleria');
-//         $imagenes = $queryBuilder->findAll();
-//     }
-// }
-
-// // Cargar imágenes desde la base de datos para la tabla
-// try {
-//     $connection = App::getConnection();
-//     $imagenes = [];
-//     $stmtImagenes = $connection->prepare("SELECT * FROM imagenes");
-//     $stmtImagenes->execute();
-//     while ($fila = $stmtImagenes->fetch(PDO::FETCH_ASSOC)) {
-//         // Si tu clase ImagenGaleria tiene un constructor con ID, pásalo aquí, si no, omite el ID
-//         $imagenes[] = new ImagenGaleria(
-//             $fila['nombre'],
-//             $fila['descripcion'],
-//             $fila['numVisualizaciones'] ?? rand(800, 1500),
-//             $fila['numLikes'] ?? rand(300, 800),
-//             $fila['numDescargas'] ?? rand(50, 200),
-//             $fila['id'] ?? null
-//         );
-//     }
-// } catch (PDOException $e) {
-//     $errores[] = "Error al cargar imágenes: " . $e->getMessage();
-// } catch (AppException $e) {
-//     $errores[] = $e->getMessage();
-// }
-
-$errores = [];
-$descripcion = '';
-$mensaje = '';
-
-try{
+    // Carga la configuración y la almacena en el contenedor de servicios
     $config = require __DIR__ . '/config.php';
-    // guardamos la configuración en el contenedor de servicios
     App::bind('config', $config);
 
-    //$queryBuilder = new QueryBuilder('imagenes', 'ImagenGaleria');
+    // Inicializa los repositorios para manejar imágenes y categorías
     $imagenRepository = new ImagenGaleriaRepository();
     $categoriaRepository = new CategoriaRepository();
 
-    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    // Procesa el formulario cuando se envía por POST
+    if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Limpia y valida los datos del formulario
         $descripcion = trim(htmlspecialchars($_POST['descripcion']));
-
         $categoria = trim(htmlspecialchars($_POST['categoria']));
 
+        // Debug: muestra la categoría seleccionada
         var_dump($categoria);
 
+        // Define los tipos de archivos de imagen permitidos
         $tiposAceptados = ['image/jpeg', 'image/jpg', 'image/gif', 'image/png'];
-        // Tipologia MIME 'tipodearchivo/extension'
+        
+        // Crea un nuevo objeto File para manejar la imagen subida
         $imagen = new File('imagen', $tiposAceptados);
-        // el parametro fileName es 'imagen' porque así lo indicamos en el formulario (type='file' name='imagen')
 
+        // Guarda la imagen en la carpeta de la galería
         $imagen->saveUploadFile(ImagenGaleria::RUTA_IMAGENES_GALLERY);
 
+        // Crea una copia de la imagen en la carpeta del portfolio
         $imagen->copyFile(ImagenGaleria::RUTA_IMAGENES_GALLERY, ImagenGaleria::RUTA_IMAGENES_PORTFOLIO);
 
+        // Crea un nuevo objeto ImagenGaleria con los datos
         $imagenGaleria = new ImagenGaleria($imagen->getFileName(), $descripcion, $categoria);
 
-        // Guardamos la imagen en la base de datos
+        // Guarda la imagen en la base de datos
         $imagenRepository->guarda($imagenGaleria);
 
-        $descripcion = ''; // Reinicio de la variable para que no aparezca en el formulario
+        // Limpia el formulario y muestra mensaje de éxito
+        $descripcion = ''; 
         $mensaje = 'Imagen guardada correctamente';
     }
-} catch (FileException $exception){
+} catch (FileException $exception) {
+    // Captura errores relacionados con el manejo de archivos
     $errores[] = $exception->getMessage();
-}
-catch (QueryException $exception){
+} catch (QueryException $exception) {
+    // Captura errores relacionados con las consultas a la base de datos
     $errores[] = $exception->getMessage();
 } catch (AppException $exception) {
+    // Captura errores generales de la aplicación
     $errores[] = $exception->getMessage();
 } finally {
+    // Siempre carga todas las imágenes y categorías para mostrar en la vista
     $imagenes = $imagenRepository->findAll();
     $categorias = $categoriaRepository->findAll();
 }
 
+// Carga la vista de la galería
 require 'views/galeria.view.php';

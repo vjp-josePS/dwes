@@ -1,106 +1,84 @@
 <?php
+// Importación de dependencias necesarias
+require_once __DIR__ . '/../exceptions/QueryException.class.php';    // Manejo de errores en consultas
+require_once __DIR__ . '/../core/App.class.php';                    // Núcleo de la aplicación
 
-require_once __DIR__ . '/../exceptions/QueryException.class.php';
-require_once __DIR__ . '/../core/App.class.php';
-
+/**
+ * Clase abstracta QueryBuilder
+ * Proporciona funcionalidad base para construir y ejecutar consultas SQL
+ * Implementa el patrón Builder para construir consultas de forma segura
+ */
 abstract class QueryBuilder
 {
     /**
+     * Conexión a la base de datos
      * @var PDO
      */
     private $connection;
 
     /**
+     * Nombre de la tabla en la base de datos
      * @var string
      */
-
     private $table;
 
     /**
-     * * @var string
+     * Nombre de la clase entidad asociada
+     * @var string
      */
     private $classEntity;
 
+    /**
+     * Constructor de la clase
+     * @param string $table Nombre de la tabla
+     * @param string $classEntity Nombre de la clase entidad
+     */
     public function __construct(string $table, string $classEntity)
     {
-        $this->connection = App::getConnection();
-        $this->table = $table;
-        $this->classEntity = $classEntity;
+        $this->connection = App::getConnection();    // Obtiene la conexión desde el contenedor
+        $this->table = $table;                      // Almacena el nombre de la tabla
+        $this->classEntity = $classEntity;          // Almacena el nombre de la clase entidad
     }
 
+    /**
+     * Ejecuta una consulta SQL y devuelve los resultados
+     * @param string $sql Consulta SQL a ejecutar
+     * @return array Resultados de la consulta
+     * @throws QueryException Si hay error en la ejecución
+     */
     private function executeQuery(string $sql): array
     {
-        /*
-        Una posibilidad que tenemos para ejecutar esta consulta el método query de la clase PDO:
-        $this->connection-<query($sql);
-        El problema de query es el mismo que el de exec, es vulnerable a ataques SQLInyection por lo que mejor vamos a usar prepare que me devolvera un pdoStatement
-        */
-
+        // Prepara la consulta para prevenir SQL Injection
         $pdoStatement = $this->connection->prepare($sql);
 
-        // Una vez que tengo el pdoStatement ya puedo hacer el execute como la sentencia SQL no tiene parámetrs, no es necesario pasarle nada al método execute
+        // Ejecuta la consulta preparada
         if ($pdoStatement->execute() === false) {
             throw new QueryException("No se ha podido ejecutar la consulta");
         }
+
+        // Devuelve los resultados como objetos de la clase entidad
         return $pdoStatement->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $this->classEntity);
     }
 
-    // public function findAll(): array
-    // {
-    //     $sql = "SELECT * FROM $this->table";
-
-    //     /*
-    //     Una posibilidad que tenemos para ejecutar esta consulta es el método query de la clase PDO:
-
-    //     $this->connection->query($sql);
-
-    //     El problema de query es el mismo que el de exec, es vulnerable a ataques SQLInyection por lo que mejor vamos a usar prepare que devolvera un pdoStatement
-    //     */
-    //     $pdoStatement = $this->connection->prepare($sql);
-
-    //     /*
-    //     Una vez que tenog el pdoStatement ya puedo hacer el execute como la sentencia sql no tiene parámetros, no es necesario pasarle nada al método execute
-    //     */
-    //     if ($pdoStatement->execute() === false) {
-    //         throw new QueryException("Error al ejecutar la consulta.");
-    //     }
-
-    //     return $pdoStatement->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $this->classEntity);
-    // }
-
+    /**
+     * Obtiene todos los registros de la tabla
+     * @return array Lista de entidades
+     */
     public function findAll(): array
     {
-        $sql = "SELECT * FROM $this->table"; // Sentencia SQL a ejecutar
+        $sql = "SELECT * FROM $this->table";
         return $this->executeQuery($sql);
     }
 
-    // public function save (IEntity $entity) : void {
-
-    //     try{
-    //         $parameters = $entity->toArray();
-
-    //         $sql = sprintf('insert into %o ($s) values (%s)', $this->table, implode(', ', array_keys(($parameters)), ': ', implode(',: ', array_keys($parameters))));
-
-    //         $statement = $this->connection->prepare($sql);
-    //         $statement->execute($parameters);
-    //     } catch (PDOException $exception) {
-    //         throw new QueryException("Error al insertar en la Base de Datos");
-    //     }
-    // }
-
-    // public function find(int $id): IEntity
-    // {
-    //     $sql = "SELECT * from $this->table where id=$id"; // Sentencia SQL a ejecutar
-    //     $pdoStatement = $this->connection->prepare($sql);
-    //     if ($pdoStatement->execute() === false){
-    //         throw new QueryException(("No se ha podido ejecutar la consulta"));
-    //     }
-    //     return $pdoStatement->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $this->classEntity);
-    // }
-
+    /**
+     * Encuentra una entidad por su ID
+     * @param int $id ID de la entidad a buscar
+     * @return IEntity Entidad encontrada
+     * @throws NotFoundException Si no se encuentra la entidad
+     */
     public function find(int $id): IEntity
     {
-        $sql = "SELECT * from $this->table WHERE id=$id"; // Sentencia SQL a ejecutar
+        $sql = "SELECT * from $this->table WHERE id=$id";
         $result = $this->executeQuery($sql);
 
         if (empty($result)) {
@@ -110,16 +88,21 @@ abstract class QueryBuilder
         return $result[0];
     }
 
+    /**
+     * Guarda una nueva entidad en la base de datos
+     * @param IEntity $entity Entidad a guardar
+     * @throws QueryException Si hay error en la inserción
+     */
     public function save(IEntity $entity): void
     {
         try {
             $parameters = $entity->toArray();
 
-            // Generar columnas y placeholders
+            // Prepara las columnas y valores para la inserción
             $columns = implode(', ', array_keys($parameters));
             $placeholders = ':' . implode(', :', array_keys($parameters));
 
-            // Construir la consulta SQL
+            // Construye la consulta SQL de inserción
             $sql = sprintf(
                 'INSERT INTO %s (%s) VALUES (%s)',
                 $this->table,
@@ -127,6 +110,7 @@ abstract class QueryBuilder
                 $placeholders
             );
 
+            // Ejecuta la inserción
             $statement = $this->connection->prepare($sql);
             $statement->execute($parameters);
         } catch (PDOException $exception) {
@@ -134,19 +118,28 @@ abstract class QueryBuilder
         }
     }
 
+    /**
+     * Ejecuta una transacción SQL
+     * @param callable $fnExecuteQuerys Función que contiene las consultas a ejecutar
+     * @throws QueryException Si hay error en la transacción
+     */
     public function executeTransaction(callable $fnExecuteQuerys)
     {
         try {
-            $this->connection->beginTransaction();
-            $fnExecuteQuerys(); // Llamo al callable para que ejecute todas las operaciones que sean necesarias realizar
-
-            $this->connection->commit(); // Para confirma las operaciones pendientes y ejecutar.
+            $this->connection->beginTransaction();   // Inicia la transacción
+            $fnExecuteQuerys();                      // Ejecuta las consultas
+            $this->connection->commit();             // Confirma los cambios
         } catch (PDOException $pdoException) {
-            $this->connection->rollBack(); // Deshace todos los cambios desde el beginTransaction
+            $this->connection->rollBack();           // Revierte los cambios si hay error
             throw new QueryException("No se ha podido realizar la operación");
         }
     }
 
+    /**
+     * Genera la parte SET de una consulta UPDATE
+     * @param array $parameters Parámetros a actualizar
+     * @return string Cadena con las actualizaciones
+     */
     private function getUpdates(array $parameters)
     {
         $updates = '';
@@ -159,11 +152,17 @@ abstract class QueryBuilder
         return $updates;
     }
 
+    /**
+     * Actualiza una entidad existente
+     * @param IEntity $entity Entidad a actualizar
+     * @throws QueryException Si hay error en la actualización
+     */
     public function update(IEntity $entity): void
     {
         try {
             $parametres = $entity->toArray();
 
+            // Construye y ejecuta la consulta UPDATE
             $sql = sprintf(
                 'UPDATE %s SET %s WHERE id =:id',
                 $this->table,

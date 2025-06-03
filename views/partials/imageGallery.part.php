@@ -13,22 +13,22 @@
                                     <a class="gallery" 
                                        href="<?= $imagen->getUrlGallery() ?>" 
                                        data-toggle="tooltip" 
-                                       data-original-title="Quick View">
+                                       data-original-title="Vista Rápida">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" data-toggle="tooltip" data-original-title="Click if you like it">
+                                    <a href="#" data-toggle="tooltip" data-original-title="¿Te gusta? ¡Dale click!">
                                         <i class="fa fa-heart"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" data-toggle="tooltip" data-original-title="Download">
+                                    <a href="#" data-toggle="tooltip" data-original-title="Descargar">
                                         <i class="fa fa-download"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" data-toggle="tooltip" data-original-title="More information">
+                                    <a href="#" data-toggle="tooltip" data-original-title="Más información">
                                         <i class="fa fa-info"></i>
                                     </a>
                                 </li>
